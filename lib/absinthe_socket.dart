@@ -42,7 +42,7 @@ class AbsintheSocket {
   }
 
   AbsintheSocket(this.endpoint, {this.socketOptions}) {
-    this.connectionCompleter = connectionCompleter;
+    this.connectionCompleter = Completer();
     if (socketOptions == null) socketOptions = AbsintheSocketOptions();
     subscriptionHandler = NotifierPushHandler(
         onError: _onError,
