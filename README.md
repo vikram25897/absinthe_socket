@@ -1,6 +1,6 @@
 # absinthe_socket
 
-A dart client for GraphQL subscriptions via [Absinthe](http://absinthe-graphql.org/) sockets
+A dart client for GraphQL subscriptions via [Absinthe](https://absinthe-graphql.org/) sockets
 
 ## Getting Started
 

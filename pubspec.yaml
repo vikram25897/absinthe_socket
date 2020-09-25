@@ -9,4 +9,4 @@ environment:
 
 dependencies:
   # Talk to phoenix channels
-  phoenix_wings: ^0.1.3
+  phoenix_wings: ^0.2.1

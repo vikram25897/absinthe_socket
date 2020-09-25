@@ -1,5 +1,7 @@
 library absinthe_socket;
 
+import 'dart:async';
+
 import 'package:phoenix_wings/phoenix_wings.dart';
 
 /// An Absinthe Socket
@@ -12,7 +14,7 @@ class AbsintheSocket {
   List<Notifier> _queuedPushes = [];
   NotifierPushHandler subscriptionHandler;
   NotifierPushHandler unsubscriptionHandler;
-
+  Completer connectionCompleter;
   static _onError(Map response) {
     print("onError");
     print(response.toString());
@@ -40,6 +42,7 @@ class AbsintheSocket {
   }
 
   AbsintheSocket(this.endpoint, {this.socketOptions}) {
+    this.connectionCompleter = connectionCompleter;
     if (socketOptions == null) socketOptions = AbsintheSocketOptions();
     subscriptionHandler = NotifierPushHandler(
         onError: _onError,
@@ -60,6 +63,7 @@ class AbsintheSocket {
     _phoenixSocket.onMessage(_onMessage);
     _absintheChannel = _phoenixSocket.channel("__absinthe__:control", {});
     _absintheChannel.join().receive("ok", _sendQueuedPushes);
+    connectionCompleter.complete();
   }
 
   disconnect() {
